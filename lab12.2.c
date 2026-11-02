@@ -5,7 +5,7 @@
 
 int main() {
 
-    setlocale(LC_ALL, ".UTF8");
+    setlocale(LC_CTYPE, "RUS");
 
     struct tm* mytime;
     time_t t;
@@ -44,38 +44,38 @@ int main() {
     else
         season = "осень";
 
-   
+
 
     printf("Московское время %02d:%02d:%02d\n", mytime->tm_hour, mytime->tm_min, mytime->tm_sec);
-    
+
 
     printf("День недели - %s\n", days[mytime->tm_wday]);
-    
+
 
     printf("%02d.%02d.%d\n", mytime->tm_mday, mytime->tm_mon + 1, year);
-    
+
 
     printf("%d %s\n", mytime->tm_mday, months[mytime->tm_mon]);
-    
+
 
     printf("Сегодня %d-й день %d года\n", mytime->tm_yday + 1, year);
-    
+
 
     if (mytime->tm_wday == 0) {
         printf("Сегодня воскресенье\n");
-        
+
     }
     else {
         int do_min = (6 - mytime->tm_wday) * 24 * 60 + (24 * 60 - total_min);
         printf("До воскресенья осталось %d дней и %d часов\n", do_min / (24 * 60), do_min / 60 % 24);
-        
+
     }
 
     printf("С первой пары прошло %d часов %d минут\n", dif_min / 60, dif_min % 60);
-   
+
 
     printf("До Нового года осталось %d месяцев и %d дней\n", 11 - mytime->tm_mon, months_day[mytime->tm_mon] - mytime->tm_mday);
-    
+
 
     //определение времени окончания текущей пары
     int end_sec = 0;
@@ -93,22 +93,22 @@ int main() {
 
     if (end_sec == 0) {
         printf("Пары закончились или не начались\n");
-        
+
     }
     else {
         int tek_sec = total_min * 60 + mytime->tm_sec;
         printf("До конца пары осталось %d минут и %d секунд\n", (end_sec - tek_sec) / 60, (end_sec - tek_sec) % 60);
-        
+
     }
 
     printf("До конца месяца осталось %d дней, до конца года - %d месяцев\n", months_day[mytime->tm_mon] - mytime->tm_mday, 11 - mytime->tm_mon);
-    
+
 
     printf("Месяц %s и год %d\n", r_months[mytime->tm_mon], year);
-    
+
 
     printf("Время года - %s, последние 2 цифры года - %02d\n", season, year % 100);
-    
+
 
     //расчет текущего дня зимы или осени
     if (mytime->tm_mon == 11 || mytime->tm_mon == 0 || mytime->tm_mon == 1) {
@@ -118,13 +118,13 @@ int main() {
         else
             z_day = 31 + mytime->tm_yday + 1;
 
-        printf(b, "Идет %d день зимы\n", z_day);
-        
+        printf("Идет %d день зимы\n", z_day);
+
     }
     else if (mytime->tm_mon >= 8 && mytime->tm_mon <= 10) {
         int o_day = mytime->tm_yday - (243 + is_vis) + 1;
-        printf(b, "Идет %d день осени\n", o_day);
-        
+        printf("Идет %d день осени\n", o_day);
+
     }
 
 
